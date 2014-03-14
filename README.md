@@ -1,6 +1,6 @@
 # DjUnique
 
-TODO: Write a gem description
+An armour for delayed_job_active_record to ensure no duplicate jobs are enqueued.
 
 ## Installation
 
