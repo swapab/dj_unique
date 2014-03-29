@@ -18,7 +18,22 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Create a [custom job class](https://github.com/collectiveidea/delayed_job#custom-jobs)
+
+```ruby
+class NewsletterJob < Struct.new(:text, :emails)
+  def perform
+    emails.each { |e| NewsletterMailer.deliver_text_to_email(text, e) }
+  end
+end
+```
+
+and enque it as a `Delayed::UniqueJob`
+
+```ruby
+  @performable = NewsletterJob.new('lorem ipsum...', Customers.find(:all).collect(&:email))
+  Delayed::Job.UniqueJob(@performable) # Ensuring no duplicate jobs are added.
+```
 
 ## Contributing
 
@@ -33,3 +48,4 @@ TODO: Write usage instructions here
 
 1. Add some more tests
 2. Documentation
+3. Support for `Delayed::UniqueJob#delay`
