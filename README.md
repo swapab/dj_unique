@@ -32,7 +32,7 @@ and enque it as a `Delayed::UniqueJob`
 
 ```ruby
   @performable = NewsletterJob.new('lorem ipsum...', Customers.find(:all).collect(&:email))
-  Delayed::Job.UniqueJob(@performable) # Ensuring no duplicate jobs are added.
+  Delayed::UniqueJob(@performable) # Ensuring no duplicate jobs are added.
 ```
 
 ## Contributing
